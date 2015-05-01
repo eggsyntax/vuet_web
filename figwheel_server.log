@@ -1,0 +1,22 @@
+Figwheel: focusing on build-ids (app)
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.287 seconds.[0m
+notifying browser that file changed:  resources/public/js/out/goog/deps.js
+notifying browser that file changed:  resources/public/js/out/cljs_deps.js
+notifying browser that file changed:  /reframe_test/subs.js
+notifying browser that file changed:  /reframe_test/db.js
+notifying browser that file changed:  /reframe_test/views.js
+notifying browser that file changed:  /reframe_test/handlers.js
+notifying browser that file changed:  /reframe_test/core.js
+notifying browser that file changed:  /reframe_test/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.215 seconds.[0m
+notifying browser that file changed:  /reframe_test/views.js
+notifying browser that file changed:  /reframe_test/core.js
+notifying browser that file changed:  /reframe_test/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.241 seconds.[0m
+notifying browser that file changed:  /reframe_test/db.js
+notifying browser that file changed:  /reframe_test/handlers.js
+notifying browser that file changed:  /reframe_test/core.js
+notifying browser that file changed:  /reframe_test/dev.js
