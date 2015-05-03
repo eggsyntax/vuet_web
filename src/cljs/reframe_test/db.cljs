@@ -32,7 +32,6 @@
 ;;
 (def default-value
   {:name "reframe"
-   :zipper (h/new-zipper) ;TODO
-   
+   :zipper (h/new-zipper)
    })
 

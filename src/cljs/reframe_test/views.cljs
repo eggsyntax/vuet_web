@@ -5,7 +5,8 @@
 (defn text-zipper
   "Render a zipper on the page as text"
   []
-  )
+  (let [zipper (subscribe [:zipper])]
+    (str @zipper)))
 
 (defn main-panel    ;; the top level of our app
   []
@@ -13,7 +14,12 @@
         zipper  (subscribe [:zipper]) ]
     (fn []
       [:div 
-       [:div "Zipper: " (str @zipper)]
+       ;[:div "Zipper: " (str @zipper)]
+       [:div "Zipper: " (text-zipper)]
+;        [:div {:class "button-class"
+;               :on-click #(dispatch [:append-node])}
+;               "append"
+;               ]
        ])))
 
 
