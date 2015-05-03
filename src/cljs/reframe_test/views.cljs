@@ -1,12 +1,20 @@
 (ns reframe_test.views
-  (:require [re-frame.core :refer [subscribe dispatch]]))
+  (:require [reframe_test.huet :as h] 
+            [re-frame.core :refer [subscribe dispatch]]))
 
+(defn text-zipper
+  "Render a zipper on the page as text"
+  []
+  )
 
 (defn main-panel    ;; the top level of our app
   []
-  (let [name  (subscribe [:name])]   ;; obtain a reactive data source
+  (let [name    (subscribe [:name])
+        zipper  (subscribe [:zipper]) ]
     (fn []
-      [:div "Hello there " @name])))
+      [:div 
+       [:div "Zipper: " (str @zipper)]
+       ])))
 
 
 (defn reframe_test-app

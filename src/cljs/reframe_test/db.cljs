@@ -1,17 +1,25 @@
 (ns reframe_test.db
   (:require
-      [schema.core :as s]))
+    [reframe_test.huet :as h]
+    [schema.core :as s]))
 
 
 ;; -- Prismatic Schema  -------------------------------------------------------
 ;; As exactly as possible, describe the correct shape of app-db.
 ;; Add a lot of helpful comments. This will be an important resource
 ;; for anyone looking at the app for the first time.
-(def schema
-  {:name     s/Str})
+
+;TODO um how do schemas work again? Add the zipper yo
+#_(def schema
+  {:name     s/Str
+   })
 
 
-(defn valid-schema?
+;TODO always valid, woohoo!
+(defn valid-schema? [db]
+  true)
+
+#_(defn valid-schema?
   "validate given db, writing any problems to console.error"
   [db]
   (let [res (s/check schema db)]
@@ -20,9 +28,11 @@
 
 
 ;; -- Default Value  ----------------------------------------------------------
-;; The initial value loaded into app-dp
+;; The initial value loaded into app-db
 ;;
 (def default-value
-  {:name "reframe"})
-
+  {:name "reframe"
+   :zipper (h/new-zipper) ;TODO
+   
+   })
 

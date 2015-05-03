@@ -13,8 +13,12 @@
   (fn  [db]
     (reaction (not (empty? @db)))))  ;; do we have data?
 
-
 (register-sub
   :name              ;; usage (subscribe [:name])
   (fn  [db]
     (reaction (:name @db))))
+
+(register-sub
+  :zipper              ;; usage (subscribe [:name])
+  (fn  [db]
+    (reaction (:zipper @db))))

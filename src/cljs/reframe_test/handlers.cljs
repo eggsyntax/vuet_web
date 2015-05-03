@@ -28,3 +28,15 @@
   (fn                             ;; handler
     [db [new-name]]               ;; because of trim-v, not [_ new-name]
     new-name))
+
+;TODO I have no idea what I'm doing here
+#_(register-handler
+  :show-zipper
+  [standard-middlewares (path :zipper)]
+  (fn
+    [_ _]
+    (println "called :show-zipper handler")
+
+    ))
+
+;TODO :key-press handler
