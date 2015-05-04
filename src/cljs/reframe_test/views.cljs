@@ -6,20 +6,26 @@
   "Render a zipper on the page as text"
   []
   (let [zipper (subscribe [:zipper])]
-    (str @zipper)))
+    (fn []
+      (println "text-zipper fn called")
+      (str @zipper))))
 
 (defn main-panel    ;; the top level of our app
   []
   (let [name    (subscribe [:name])
         zipper  (subscribe [:zipper]) ]
     (fn []
+      (println )
+      (println "main-panel sees zipper as: "@zipper)
       [:div 
-       ;[:div "Zipper: " (str @zipper)]
        [:div "Zipper: " (text-zipper)]
-;        [:div {:class "button-class"
-;               :on-click #(dispatch [:append-node])}
-;               "append"
-;               ]
+       [:div
+        [:button {:class "button-class" 
+                  :on-click #(do
+                               (println @zipper) 
+                               (dispatch [:append-node]))} 
+         "append" 
+         ]]
        ])))
 
 

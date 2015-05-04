@@ -1,5 +1,6 @@
 (ns reframe_test.handlers
-  (:require [reframe_test.db :refer [default-value valid-schema?]]
+  (:require [reframe_test.db :refer [default-value valid-schema?]] 
+            [reframe_test.huet :as h]
             [re-frame.core :refer [register-handler debug after path trim-v]]))
 
 
@@ -28,6 +29,16 @@
   (fn                             ;; handler
     [db [new-name]]               ;; because of trim-v, not [_ new-name]
     new-name))
+
+(register-handler                 ;; handlers changes the footer filter
+  :append-node
+  ;[standard-middlewares (path :name)]
+  (fn                             ;; handler
+    [db _]
+    (let [zipper (:zipper db)] ; can I subscribe instead? or is that views only
+    ;(let [zipper (h/new-zipper)] ; can I subscribe instead? or is that views only
+      (println "db is " db)
+      (assoc db :zipper (h/append zipper)))))
 
 ;TODO I have no idea what I'm doing here
 #_(register-handler
