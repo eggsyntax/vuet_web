@@ -7,23 +7,19 @@
   []
   (let [zipper (subscribe [:zipper])]
     (fn []
-      (println "text-zipper fn called")
-      (str @zipper))))
+      [:div "Zipper: " (str @zipper)]
+      )))
 
 (defn main-panel    ;; the top level of our app
   []
   (let [name    (subscribe [:name])
-        zipper  (subscribe [:zipper]) ]
+        ;zipper  (subscribe [:zipper])]
     (fn []
-      (println )
-      (println "main-panel sees zipper as: "@zipper)
       [:div 
-       [:div "Zipper: " (text-zipper)]
+       [:div "Zipper: " [text-zipper]]
        [:div
         [:button {:class "button-class" 
-                  :on-click #(do
-                               (println @zipper) 
-                               (dispatch [:append-node]))} 
+                  :on-click #(dispatch [:append-node])}
          "append" 
          ]]
        ])))
