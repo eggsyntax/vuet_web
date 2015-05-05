@@ -7,13 +7,13 @@
   []
   (let [zipper (subscribe [:zipper])]
     (fn []
-      [:div "Zipper: " (str @zipper)]
-      )))
+      [:div "Zipper: " (str @zipper)])))
 
 (defn main-panel    ;; the top level of our app
   []
   (let [name    (subscribe [:name])
-        ;zipper  (subscribe [:zipper])]
+        ;zipper  (subscribe [:zipper])
+        ]
     (fn []
       [:div 
        [:div "Zipper: " [text-zipper]]
@@ -32,3 +32,4 @@
       (if-not @ready?                ;; data is loaded?
          [:div "Initialising ..."]   ;; tell them we are working on it
          [main-panel]))))            ;; all good, render the app
+
