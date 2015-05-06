@@ -9,17 +9,14 @@
 ;; Add a lot of helpful comments. This will be an important resource
 ;; for anyone looking at the app for the first time.
 
-;TODO um how do schemas work again? Add the zipper yo
-#_(def schema
+; TODO as far as I can tell, schema isn't actually being validated -- eg
+; if I change :zipper to be s/Str, I'm not getting an error.
+(def schema
   {:name     s/Str
+   :zipper   []
    })
 
-
-;TODO always valid, woohoo!
-(defn valid-schema? [db]
-  true)
-
-#_(defn valid-schema?
+(defn valid-schema?
   "validate given db, writing any problems to console.error"
   [db]
   (let [res (s/check schema db)]

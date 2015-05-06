@@ -32,22 +32,10 @@
 
 (register-handler                 ;; handlers changes the footer filter
   :append-node
-  ;[standard-middlewares (path :name)]
   (fn                             ;; handler
     [db _]
-    (let [zipper (:zipper db)] ; can I subscribe instead? or is that views only
-    ;(let [zipper (h/new-zipper)] ; can I subscribe instead? or is that views only
+    (let [zipper (:zipper db)]
       (println "db is " db)
       (assoc db :zipper (h/append zipper)))))
-
-;TODO I have no idea what I'm doing here
-#_(register-handler
-  :show-zipper
-  [standard-middlewares (path :zipper)]
-  (fn
-    [_ _]
-    (println "called :show-zipper handler")
-
-    ))
 
 ;TODO :key-press handler

@@ -11,18 +11,15 @@
 
 (defn main-panel    ;; the top level of our app
   []
-  (let [name    (subscribe [:name])
-        ;zipper  (subscribe [:zipper])
-        ]
+  (let [name (subscribe [:name])]
     (fn []
       [:div 
-       [:div "Zipper: " [text-zipper]]
+       [text-zipper]
        [:div
         [:button {:class "button-class" 
                   :on-click #(dispatch [:append-node])}
          "append" 
-         ]]
-       ])))
+         ]]])))
 
 
 (defn reframe_test-app
