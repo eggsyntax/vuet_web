@@ -9,8 +9,13 @@
     (fn []
       [:div "Zipper: " (str @zipper)])))
 
+(defn on-keypress [keypress]
+  (println (char (.-keyCode keypress))))
+
 (defn main-panel    ;; the top level of our app
   []
+  ; This works but violates re-frame:   :/
+  (.addEventListener js/document "keypress" on-keypress)
   (let [name (subscribe [:name])]
     (fn []
       [:div 
