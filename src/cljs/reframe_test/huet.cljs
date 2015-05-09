@@ -132,6 +132,35 @@
   (let [f (get char-fn-map (char c) nil)]
     (or f no-op)))
 
+(defn act-on
+  "Determine and apply a function to the zipper based on input. Return the modified
+ zipper (or return the original zipper if the called fn returns nil)."
+  [zipper input]
+  (let [next-fn (interpret input)
+        next-zip (next-fn zipper)]
+    (if next-zip
+      (do
+        (swap! history conj next-zip)
+        next-zip)
+      zipper)))
+
+; -main versions are no longer appropriate
+#_(defn -main
+  "Loop indefinitely over user input, interpreting each char as a
+  zipper command"
+  [& args]
+  (println "Walking zipper. '?' for help.")
+  (let [init-zip (new-zipper)
+        term (Terminal/getTerminal)]
+    (loop [zipper init-zip]
+      (println)
+      (println zipper)
+      (let [input (char (.readCharacter term System/in))
+            _ (println "zipper going in is " zipper)
+            next-zip (act-on zipper input)
+            _ (println "next-zip is now " next-zip)]
+        (recur next-zip)))))
+
 #_(defn -main
   "Loop indefinitely over user input, interpreting each char as a
   zipper command"
