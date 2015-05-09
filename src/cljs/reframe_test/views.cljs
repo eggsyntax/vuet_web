@@ -9,11 +9,11 @@
     (fn []
       [:div "Zipper: " (str @zipper)])))
 
-(defn on-keypress [something keypress]
+(defn on-keypress [cur-zipper keypress]
   (let [_ (println "type " (type (.-keyCode keypress))) 
         keychar (char (.-keyCode keypress))] 
     (println "keychar " keychar)
-    (println "something " something)
+    (println "cur-zipper " cur-zipper)
     (println "str keypress " (str keypress))
     ;(println (h/act-on keychar))
     ))
