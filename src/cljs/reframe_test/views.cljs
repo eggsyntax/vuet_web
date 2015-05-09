@@ -9,23 +9,29 @@
     (fn []
       [:div "Zipper: " (str @zipper)])))
 
-(defn on-keypress [keypress]
-  (println (char (.-keyCode keypress))))
+(defn on-keypress [something keypress]
+  (let [_ (println "type " (type (.-keyCode keypress))) 
+        keychar (char (.-keyCode keypress))] 
+    (println "keychar " keychar)
+    (println "something " something)
+    (println "str keypress " (str keypress))
+    ;(println (h/act-on keychar))
+    ))
 
 (defn main-panel    ;; the top level of our app
   []
   ; This works but violates re-frame:   :/
   (.addEventListener js/document "keypress" on-keypress)
-  (let [name (subscribe [:name])]
+  (let [name (subscribe [:name])
+        zipper (subscribe [:zipper])]
     (fn []
-      [:div 
-       [text-zipper]
-       [:div
-        [:button {:class "button-class" 
-                  :on-click #(dispatch [:append-node])}
-         "append" 
-         ]]])))
-
+      (let [_ (.addEventListener js/document 
+                                 "keypress" 
+                                 (partial on-keypress @zipper))]
+        [:div [text-zipper] 
+         [:div [:button {:class "button-class" 
+                         :on-click #(dispatch [:append-node])} 
+                "append" ]]]))))
 
 (defn reframe_test-app
   []
