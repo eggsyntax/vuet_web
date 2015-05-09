@@ -2,24 +2,24 @@
   (:require [reframe_test.huet :as h] 
             [re-frame.core :refer [subscribe dispatch]]))
 
-(defn text-zipper
+(defn render-zipper
   "Render a zipper on the page as text"
-  []
-  (let [zipper (subscribe [:zipper])]
-    (fn []
-      [:div "Zipper: " (str @zipper)])))
+  [zipper]
+  (fn [] 
+    [:div "Zipper: " (str @zipper)]))
 
 (defn on-keypress [keypress]
   (println (char (.-keyCode keypress))))
 
 (defn main-panel    ;; the top level of our app
   []
-  ; This works but violates re-frame:   :/
+  ; This works but violates re-frame?   :/
   (.addEventListener js/document "keypress" on-keypress)
-  (let [name (subscribe [:name])]
+  (let [name (subscribe [:name])
+        zipper (subscribe [:zipper])]
     (fn []
       [:div 
-       [text-zipper]
+       [render-zipper zipper]
        [:div
         [:button {:class "button-class" 
                   :on-click #(dispatch [:append-node])}
