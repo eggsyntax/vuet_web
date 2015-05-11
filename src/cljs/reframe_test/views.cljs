@@ -1,5 +1,5 @@
 (ns reframe_test.views
-  (:require [reframe_test.huet :as h] 
+  (:require [reframe_test.huet :as h]
             [re-frame.core :refer [subscribe dispatch]]))
 
 (defn text-zipper
@@ -9,29 +9,32 @@
     (fn []
       [:div "Zipper: " (str @zipper)])))
 
+; TODO - when on-keypress is called, it looks like it's cycling through
+; the whole zipper history rather than the current state. Oh! Because the event 
+; listener is being called repeatedly inside the fn that's updated all the time
+; (see event listener on line 32).
 (defn on-keypress [cur-zipper keypress]
   (let [_ (println "type " (type (.-keyCode keypress))) 
         keychar (char (.-keyCode keypress))] 
     (println "keychar " keychar)
-    (println "cur-zipper " cur-zipper)
+    (println "cur-zipper " @cur-zipper)
     (println "str keypress " (str keypress))
     ;(println (h/act-on keychar))
     ))
 
 (defn main-panel    ;; the top level of our app
   []
-  ; This works but violates re-frame:   :/
-  (.addEventListener js/document "keypress" on-keypress)
   (let [name (subscribe [:name])
-        zipper (subscribe [:zipper])]
-    (fn []
-      (let [_ (.addEventListener js/document 
-                                 "keypress" 
-                                 (partial on-keypress @zipper))]
-        [:div [text-zipper] 
-         [:div [:button {:class "button-class" 
-                         :on-click #(dispatch [:append-node])} 
-                "append" ]]]))))
+        zipper (subscribe [:zipper])] 
+
+    ; The following works but violates re-frame:   :/
+    (.addEventListener js/document "keypress" (partial on-keypress zipper))
+
+    (fn [] 
+      [:div [text-zipper] 
+       [:div [:button {:class "button-class" 
+                       :on-click #(dispatch [:append-node])} 
+              "append" ]]])))
 
 (defn reframe_test-app
   []
