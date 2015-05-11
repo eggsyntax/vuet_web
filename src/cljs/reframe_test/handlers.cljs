@@ -30,6 +30,17 @@
     [db [new-name]]               ;; because of trim-v, not [_ new-name]
     new-name))
 
+(register-handler
+  :act-on-keypress
+  (fn [db [cur-zipper keypress]]
+   (let [_ (println "type " (type (.-keyCode keypress)))
+        keychar (char (.-keyCode keypress))]
+    (println "keychar " keychar)
+    (println "cur-zipper " @cur-zipper)
+    (println "str keypress " (str keypress))
+    ;(println (h/act-on keychar))
+    )))
+
 (register-handler                 ;; handlers changes the footer filter
   :append-node
   (fn                             ;; handler
@@ -38,4 +49,3 @@
       (println "db is " db)
       (assoc db :zipper (h/append zipper)))))
 
-;TODO :key-press handler
