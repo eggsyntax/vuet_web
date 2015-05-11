@@ -39,14 +39,3 @@
       (assoc db :zipper (h/append zipper)))))
 
 ;TODO :key-press handler
-(register-handler
-  :act-on-keypress
-  (fn
-    [& args]
-    (let []
-      (println "args are: " args)
-      ;(println "keypress char is " (.-keyCode ))
-      ["arbitrary return value"]
-      )
-    )
-  )
