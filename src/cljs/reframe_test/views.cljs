@@ -9,10 +9,6 @@
     (fn []
       [:div "Zipper: " (str @zipper)])))
 
-; TODO - when on-keypress is called, it looks like it's cycling through
-; the whole zipper history rather than the current state. Oh! Because the event 
-; listener is being called repeatedly inside the fn that's updated all the time
-; (see event listener on line 32).
 (defn on-keypress [cur-zipper keypress]
   (let [_ (println "type " (type (.-keyCode keypress))) 
         keychar (char (.-keyCode keypress))] 
@@ -29,7 +25,6 @@
 
     ; The following works but violates re-frame:   :/
     (.addEventListener js/document "keypress" (partial on-keypress zipper))
-
     (fn [] 
       [:div [text-zipper] 
        [:div [:button {:class "button-class" 
