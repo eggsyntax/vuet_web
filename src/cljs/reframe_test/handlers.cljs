@@ -36,13 +36,15 @@
   (fn [db [cur-zipper keycode]]
     ; Temporarily add 32 until I fix the keypress
     ; problem in views
-   (let [keychar (char (+ 32 keycode))]
-    (println "keycode " keycode)
-    (println "keychar " keychar)
-    (println "db " db)
-    (println "cur-zipper " @cur-zipper)
-    (println (h/act-on cur-zipper keychar))
-     db ; Return unmodified db temporarily
+   (let [keychar (char (+ 32 keycode))
+         modified-z (h/act-on cur-zipper keychar)] 
+     (println "keycode " keycode)
+     (println "keychar " keychar)
+     (println "db " db)
+     (println "cur-zipper " @cur-zipper)
+     (println "modified-z: " modified-z)
+     (assoc db :zipper modified-z)
+     ; Return unmodified db temporarily
     )))
 
 (register-handler                 ;; handlers changes the footer filter

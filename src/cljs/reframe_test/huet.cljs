@@ -9,7 +9,7 @@
 
 (def char-range (seq "abcdefghijklmnopqrstuwvxyz")) ;TODO
 (def index (atom 0))
-(def history (atom '()))
+(def history (atom '())) ;TODO handle w/ add-watch instead
 
 (defn next-index []
   (swap! index inc))
