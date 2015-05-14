@@ -32,13 +32,17 @@
 
 (register-handler
   :act-on-keypress
-  (fn [db [cur-zipper keypress]]
-   (let [_ (println "type " (type (.-keyCode keypress)))
-        keychar (char (.-keyCode keypress))]
+  standard-middlewares
+  (fn [db [cur-zipper keycode]]
+    ; Temporarily add 32 until I fix the keypress
+    ; problem in views
+   (let [keychar (char (+ 32 keycode))]
+    (println "keycode " keycode)
     (println "keychar " keychar)
+    (println "db " db)
     (println "cur-zipper " @cur-zipper)
-    (println "str keypress " (str keypress))
-    ;(println (h/act-on keychar))
+    (println (h/act-on cur-zipper keychar))
+     db ; Return unmodified db temporarily
     )))
 
 (register-handler                 ;; handlers changes the footer filter

@@ -22,11 +22,13 @@
   []
   (let [name (subscribe [:name])
         zipper (subscribe [:zipper])] 
-
-    ; The following works but violates re-frame:   :/
-    (.addEventListener js/document "keypress" (partial on-keypress zipper))
     (fn [] 
-      [:div [text-zipper] 
+      [:div 
+       ; This works, but what other elements can I use it on? Won't work on div.
+       ; Comes out capitalized, dunno why. Think I saw a web page on it?
+       ; Could add 32, I guess.
+       [:input {:on-key-down #(dispatch [:act-on-keypress zipper (.-which %)])}]
+       [text-zipper] 
        [:div [:button {:class "button-class" 
                        :on-click #(dispatch [:append-node])} 
               "append" ]]])))

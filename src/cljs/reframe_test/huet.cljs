@@ -130,6 +130,7 @@
   "Map char input to function-to-call"
   [c]
   (let [f (get char-fn-map (char c) nil)]
+    (println "gonna call " f)
     (or f no-op)))
 
 (defn act-on
@@ -137,7 +138,7 @@
  zipper (or return the original zipper if the called fn returns nil)."
   [zipper input]
   (let [next-fn (interpret input)
-        next-zip (next-fn zipper)]
+        next-zip (next-fn @zipper)] ; derefing because it's a reagent reaction
     (if next-zip
       (do
         (swap! history conj next-zip)
